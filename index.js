@@ -1,4 +1,4 @@
-(function ($, doc) {
+(function($, doc) {
   'use strict';
   /*
   A loja de carros será nosso desafio final. Na aula anterior, você fez a parte
@@ -22,26 +22,24 @@
   nesse arquivo, dentro do `console.log`, o link para o pull request no seu
   projeto.
   */
-  var app = (function () {
+  var app = (function() {
     return {
-      init: function init () {
-        console.log('app init');
+      init: function init() {
         this.companyInfo();
         this.initEvents();
       },
 
-      initEvents () {
+      initEvents() {
         $('[data-js="form-register"]').on('submit', this.handleSubmit);
       },
 
-      handleSubmit: function handleSubmit (e) {
+      handleSubmit: function handleSubmit(e) {
         e.preventDefault();
-        console.log('submit');
         var $tableCar = $('[data-js="table-car"]').get();
         $tableCar.appendChild(app.createNewCar());
       },
 
-      createNewCar: function createNewCar () {
+      createNewCar: function createNewCar() {
         const $fragment = doc.createDocumentFragment();
         var $tr = doc.createElement('tr');
         var $tdImage = doc.createElement('td');
@@ -68,7 +66,7 @@
         return $fragment.appendChild($tr);
       },
 
-      companyInfo: function companyInfo () {
+      companyInfo: function companyInfo() {
         console.log('company info');
         var ajax = new XMLHttpRequest();
         ajax.open('GET', 'company.json', true);
@@ -76,7 +74,7 @@
         ajax.addEventListener('readystatechange', this.getCompanyInfo, false);
       },
 
-      getCompanyInfo: function getCompanyInfo () {
+      getCompanyInfo: function getCompanyInfo() {
         if (!app.isReady.call(this)) {
           return;
         }
@@ -88,7 +86,7 @@
         $companyPhone.textContent = data.phone;
       },
 
-      isReady: function isReady () {
+      isReady: function isReady() {
         return this.readyState === 4 && this.status === 200;
       },
     };
