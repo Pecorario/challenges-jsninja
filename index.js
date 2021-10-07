@@ -48,6 +48,10 @@
         var $tdYear = doc.createElement('td');
         var $tdPlate = doc.createElement('td');
         var $tdColor = doc.createElement('td');
+        var $tdDelete = doc.createElement('td');
+        var $buttonDelete = doc.createElement('button');
+
+        $tr.setAttribute('data-js', 'table-line');
 
         $image.setAttribute('src', $('[data-js="image"]').get().value);
         $tdImage.appendChild($image);
@@ -57,13 +61,26 @@
         $tdPlate.textContent = $('[data-js="plate"]').get().value;
         $tdColor.textContent = $('[data-js="color"]').get().value;
 
+        $buttonDelete.textContent = 'Deletar';
+        $buttonDelete.setAttribute('data-js', 'button-delete');
+
+        $buttonDelete.addEventListener('click', this.deleteLine, false);
+
+        $tdDelete.appendChild($buttonDelete);
+        
         $tr.appendChild($tdImage);
         $tr.appendChild($tdBrand);
         $tr.appendChild($tdYear);
         $tr.appendChild($tdPlate);
         $tr.appendChild($tdColor);
+        $tr.appendChild($tdDelete);
 
         return $fragment.appendChild($tr);
+      },
+
+      deleteLine: function deleteLine() {
+        var index = this.parentNode.parentNode.rowIndex;
+        return $('[data-js="table-line"]').get(index-1).remove();;
       },
 
       companyInfo: function companyInfo() {
